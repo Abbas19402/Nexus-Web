@@ -9,13 +9,13 @@ import Store from './Store'
 const Providers = ({ children }) => {
     const persistor = persistStore(Store);
   return (
-    <SocketProvider>
+    // <SocketProvider>
       <Provider store={Store}>
           <PersistGate persistor={persistor}>
               {children}
           </PersistGate>
       </Provider>
-    </SocketProvider>
+    // </SocketProvider>
   )
 }
 

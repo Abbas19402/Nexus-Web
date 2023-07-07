@@ -22,15 +22,14 @@ const MessageBox = ({ setChats }) => {
     e.target.reset();
   }
 
-  useEffect(()=> {
-    socket.on('chatMessage', (message)=> {
-        console.log('Recieved Message: ', message);
-    })
-
-    return ()=> {
-        socket.off('chatMessage')
-    }
-  },[socket])
+//   useEffect(()=> {
+//     socket.on('chatMessage', (message)=> {
+//         console.log('Recieved Message: ', message);
+//     })
+//     return ()=> {
+//         socket.off('chatMessage')
+//     }
+//   },[])
 
   return (  
     <form onSubmit={Send} className="h-12 w-full flex flex-row justify-between gap-x-2 items-center">

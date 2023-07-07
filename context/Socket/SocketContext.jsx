@@ -7,7 +7,6 @@ const SocketProvider = ({ children }) => {
   console.log("Now connecting to socket");
   const socket = io.connect('http://localhost:5000');
   useEffect(()=> {
-    socket.connect();
     try{
       socket.on('connect' , () => {
         console.log('A new user connected with the socket!!!!')

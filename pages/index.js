@@ -13,8 +13,7 @@ export default function Home() {
   const layout = useSelector(state => state.layoutSwitch.layout)
 
   useEffect(()=> {
-    if(loginStatus) {
-      alert("UE")
+    if(!loginStatus) {
       router.push('/auth/login')
     }
   },[loginStatus , layout])
