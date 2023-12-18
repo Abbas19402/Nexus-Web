@@ -30,7 +30,7 @@ const AuthenticationPage = () => {
                 </div>
             </div>
             <div className="w-full h-fit">
-                {isSignupCompleted ? <Forms.Login /> : <Forms.Signup />}
+                {isSignupCompleted ? <Forms.Login /> : <Forms.Signup isSignupCompleted={isSignupCompleted} setSignupCompleted={setSignupCompleted}/>}
             </div>
 
         </div>  

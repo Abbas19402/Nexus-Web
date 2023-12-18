@@ -6,12 +6,13 @@ const LayoutSlice = createSlice({
         layout: 'core'
     },
     reducers: {
-        setLayout: (state, action) => {
+        SWITCH_LAYOUT: (state, action) => {
+            console.log("Layout changed to: ",action.payload)
             state.layout = action.payload
         }
     }
 })
 
-export const { setLayout } = LayoutSlice.actions;
+export const { SWITCH_LAYOUT } = LayoutSlice.actions;
 const layoutReducer = LayoutSlice.reducer
 export default layoutReducer

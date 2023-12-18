@@ -1,22 +1,28 @@
-import React , { useEffect, useState } from 'react'
+import React , { useState } from 'react'
 import ChatHeader from './Header/ChatHeader'
-import Icons from '../Icons'
 import MessageBox from './Message Box'
+import { useSelector } from 'react-redux'
+import jwt from 'jsonwebtoken'
 
 const Chat = ({ chatSelected , setChatSelected }) => {
+  const user = useSelector(state => state.auth.user);
+
   const [ message , setMessage ] = useState(null);
   const [ chats , setChats ] = useState([
     {
       message: 'How are you doing?',
-      messageFrom: 'sender'
+      messageFrom: 'sender',
+      sentBy: ''
     },
     {
       message: 'Im Fine!!',
-      messageFrom: 'reciever'
+      messageFrom: 'reciever',
+      sentBy: ''
     },
     {
       message: 'Good Man!!',
-      messageFrom: 'sender'
+      messageFrom: 'sender',
+      sentBy: ''
     },
   ]);
   return (
@@ -31,8 +37,10 @@ const Chat = ({ chatSelected , setChatSelected }) => {
         <div id='chatBox' className='w-full h-[calc(100vh-10rem)] border-2 overflow-y-scroll flex flex-col align-bottom'>
           {chats.map( (item, index) => (
             <div key={index} id={item.messageFrom} className="w-full my-2 h-fit text-gray-300">
-              <div className={`w-fit max-w-xs h-full rounded-lg flex justify-start items-center px-2 py-2 text-wrap relative mx-2 ${item.messageFrom == 'sender' ? 'float-right bg-gray-800' : 'float-left bg-sky-800'}`}>
-                {item.message}
+              <div className={`flex flex-col w-fit m-2 rounded ${item.messageFrom == 'sender' ? 'float-right bg-gray-800' : 'float-left bg-sky-800'}`}>
+                <div className={`w-fit max-w-xs h-full flex justify-start items-center py-2 text-wrap relative mx-2`}>
+                  {item.message}
+                </div>
               </div>
             </div>
           ) )}

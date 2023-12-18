@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { toast } from 'react-toastify';
 
-const Signup = ({ isSignupCompleted }) => {
+const Signup = ({ isSignupCompleted, setSignupCompleted }) => {
   const signup = async(e) => {
     e.preventDefault()
     const signInDetails = new FormData(e.currentTarget)
@@ -14,13 +14,14 @@ const Signup = ({ isSignupCompleted }) => {
     try{
       const res = await axios.request({
         method: 'POST',
-        url: 'http://localhost:5000/auth/signup',
+        url: 'http://localhost:5000/api/auth/signup',
         data: {
           displayName: values.displayName,
           username: values.username,
           password: values.password
         }
       })
+      setSignupCompleted(true)
       toast('API Hit successfully!!!')
       console.log(res);
     } catch(error) {

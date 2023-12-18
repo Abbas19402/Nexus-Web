@@ -1,35 +1,55 @@
 import React, { useContext, useEffect } from 'react'
 import Icons from '@/components/Icons';
 import { SocketContext } from '@/context/Socket/SocketContext';
+import { useSelector } from 'react-redux';
 
 const MessageBox = ({ setChats }) => {
   const socket = useContext(SocketContext);
+  const user = useSelector(state => state.auth.user)
 
   const Send = (e) => {
     e.preventDefault(); 
     const messageValues = new FormData(e.currentTarget);
     let values = {};
-    for(var pair of messageValues.entries())
-        values[pair[0]] = pair[1];
+    for(var pair of messageValues.entries()) values[pair[0]] = pair[1];
 
     setChats((oldChats) => {
-        return [...oldChats , {
-            message: values.message,
-            messageFrom: 'sender'
-        }]
+      return [...oldChats , {
+          message: values.message,
+          messageFrom: 'sender',
+          sentBy: user.user_id
+      }]
     })
-    socket.emit('chatMessage', values.message);
+
+    socket.emit('chatMessage', {
+      message: values.message,
+      senderId: user.user_id
+    });
     e.target.reset();
   }
 
-//   useEffect(()=> {
-//     socket.on('chatMessage', (message)=> {
-//         console.log('Recieved Message: ', message);
-//     })
-//     return ()=> {
-//         socket.off('chatMessage')
-//     }
-//   },[])
+  useEffect(()=> {
+    const handleIncomingMessages = (message) => {
+      console.log('Recieved Message: ', message);
+      if(message.senderId !== user.user_id) {
+        setChats((oldChats) => [
+          ...oldChats,
+          {
+            message: message.message,
+            messageFrom: 'reciever',
+            sentBy: user.user_id
+          }
+        ])
+      }
+    }
+
+    socket.on('chatMessage',handleIncomingMessages)
+
+    return ()=> {
+      console.log("Cleaning useEffect");
+      socket.off('chatMessage',handleIncomingMessages)
+    }
+  },[socket, setChats])
 
   return (  
     <form onSubmit={Send} className="h-12 w-full flex flex-row justify-between gap-x-2 items-center">
