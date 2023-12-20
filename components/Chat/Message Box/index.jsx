@@ -17,13 +17,15 @@ const MessageBox = ({ setChats }) => {
       return [...oldChats , {
           message: values.message,
           messageFrom: 'sender',
-          sentBy: user.user_id
+          sentBy: user.user_id,
+          senderName: user.displayName
       }]
     })
 
     socket.emit('chatMessage', {
       message: values.message,
-      senderId: user.user_id
+      senderId: user.user_id,
+      senderName: user.displayName,
     });
     e.target.reset();
   }
@@ -37,7 +39,8 @@ const MessageBox = ({ setChats }) => {
           {
             message: message.message,
             messageFrom: 'reciever',
-            sentBy: user.user_id
+            senderName: message.senderName,
+            sentBy: message.senderId
           }
         ])
       }

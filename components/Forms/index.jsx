@@ -1,9 +1,11 @@
 import Login from "./Auth/Login"
 import Signup from "./Auth/Signup"
+import CreateChatForm from "./CreateChatForm"
 
 const Forms = {
     Login,
-    Signup
+    Signup,
+    CreateChatForm
 }
 
 export default Forms

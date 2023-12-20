@@ -1,10 +1,11 @@
-import { Menu , More , Back , SendText } from "./General";
+import { Menu , More , Back , SendText,Add } from "./General";
 
 const Icons = {
     Menu,
     More,
     Back,
-    SendText
+    SendText,
+    Add
 }
 
 export default Icons

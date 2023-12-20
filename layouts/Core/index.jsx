@@ -7,7 +7,7 @@ import Chat from '@/components/Chat'
 const CoreLayout = ({ children }) => {
   const [ chatSelected , setChatSelected ] = useState(false)
   return (
-    <div className="isolate bg-[#000002] scroll-smooth h-screen overflow-hidden">
+    <div className="bg-[#000002] scroll-smooth h-screen overflow-hidden">
       <div
         className="fixed inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[0rem]"
         aria-hidden="true"
@@ -20,12 +20,12 @@ const CoreLayout = ({ children }) => {
           }}
         />
       </div>
-      <div className='w-full min-h-screen h-full flex flex-row backdrop-blur-lg saturate-100 lg:divide-x-[1.5px] divide-gray-600'>
+      <div className='w-full h-full flex flex-row backdrop-blur-lg saturate-100 lg:divide-x-[1.5px] divide-gray-600'>
         <div className='w-full lg:w-[40%] divide-y-[1.5px] divide-gray-600 lg:px-2'>
           <div className="w-full h-20">
             <Header/>
           </div>
-          <div className={`h-full lg:w-full overflow-y-auto ${Styles.customScrollbar}`}>
+          <div className={`min-h-screen h-full lg:w-full overflow-y-auto ${Styles.customScrollbar}`}>
             <div className="w-full h-full lg:hidden ">
               {chatSelected ? <Chat
                 setChatSelected={setChatSelected} 

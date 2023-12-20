@@ -3,7 +3,7 @@ import React from 'react'
 
 const Authentication = () => {
   return (
-    <div className='w-screen min-h-screen overflow-hiodden bg-black'>
+    <div className='relative w-screen min-h-screen overflow-hidden bg-black'>
       <AuthenticationPage />
     </div>
   )

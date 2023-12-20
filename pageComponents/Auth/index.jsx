@@ -16,11 +16,11 @@ const AuthenticationPage = () => {
     },[]) 
     const [ isSignupCompleted , setSignupCompleted ] = useState(false)
   return (
-    <div className='w-full h-full flex flex-col justify-center items-center'>
+    <div className='w-screen h-full flex flex-col justify-center items-center'>
         <div className="w-full h-[30vh] flex justify-center items-center">
             <span className="text-6xl font-thin text-white tracking-widest uppercase underline underline-offset-8">NEXUS</span>
         </div>
-        <div className="w-[35vw] h-[65vh] flex flex-col p-2 scale-90">
+        <div className="w-[90vw] md:w-[35vw] md:h-[65vh] flex flex-col p-2 scale-90">
             <div className="w-full h-16 flex flex-row gap-2 border-[1.5px] rounded-xl overflow-hidden p-2 border-stone-600">
                 <div className={`h-full w-[50%] ${isSignupCompleted ? ' bg-stone-600 ' : 'bg-stone-800'} rounded-lg flex justify-center items-center hover:cursor-pointer`} onClick={()=> setSignupCompleted(true)}>
                     <span className='text-lg text-white tracking-widest uppercase font-medium'>Login</span>
@@ -32,7 +32,6 @@ const AuthenticationPage = () => {
             <div className="w-full h-fit">
                 {isSignupCompleted ? <Forms.Login /> : <Forms.Signup isSignupCompleted={isSignupCompleted} setSignupCompleted={setSignupCompleted}/>}
             </div>
-
         </div>  
     </div>
   )

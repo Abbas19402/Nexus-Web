@@ -30,7 +30,7 @@ export default function Home() {
           <Chat />
         </CoreLayout>
       </div>
-      <div className='block lg:hidden h-[calc(100vh-5rem)] overflow-hidden w-full'>
+      <div className='block lg:hidden h-[100vh] overflow-hidden w-full'>
         {layout == 'core' ? <CoreLayout>
           <Chat />
         </CoreLayout> : layout == 'chat' && <div className='h-full'><ChatLayoutMobile /></div>}

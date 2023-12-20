@@ -18,6 +18,7 @@ const Signup = ({ isSignupCompleted, setSignupCompleted }) => {
         data: {
           displayName: values.displayName,
           username: values.username,
+          email: values.email,
           password: values.password
         }
       })
@@ -30,15 +31,19 @@ const Signup = ({ isSignupCompleted, setSignupCompleted }) => {
   } 
   return (
     <form onSubmit={signup} className='py-2'>
-      <div className="flex flex-row justify-between gap-2">
-        <div className="w-full h-fit py-2 flex flex-col gap-y-2">
+      <div className="w-full flex flex-col lg:flex-row justify-between">
+        <div className="w-full lg:w-[49%] h-fit py-2 flex flex-col gap-y-2">
           <label className='text-gray-500 text-lg font-medium tracking-wide'>Display Name</label>
           <input type="text" name="displayName" autoComplete=" " id="displayName" className='capitalize text-gray-200 px-1 tracking-wider bg-transparent border-[2px] border-gray-400 focus:outline-0 rounded-md'/>
         </div>
-        <div className="w-full h-fit py-2 flex flex-col gap-y-2">
+        <div className="w-full lg:w-[49%] h-fit py-2 flex flex-col gap-y-2">
           <label className='text-gray-500 text-lg font-medium tracking-wide'>Username</label>
           <input type="text" name="username" id="username" autoComplete=" " className='text-gray-200 px-1 tracking-wider bg-transparent border-[2px] border-gray-400 focus:outline-0 rounded-md'/>
         </div>
+      </div>
+      <div className="w-full lg:w-full h-fit py-2 flex flex-col gap-y-2">
+        <label className='text-gray-500 text-lg font-medium tracking-wide'>E-mail</label>
+        <input type="mail" name="email" id="email" autoComplete=" " className='text-gray-200 px-1 tracking-wider bg-transparent border-[2px] border-gray-400 focus:outline-0 rounded-md'/>
       </div>
       <div className="w-full h-fit py-2 flex flex-col gap-y-2">
           <label className='text-gray-500 text-lg font-medium tracking-wide'>Password</label>

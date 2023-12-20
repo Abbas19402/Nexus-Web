@@ -1,20 +1,9 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import { useSelector } from 'react-redux'
 
 const ProfilePage = () => {
+  const user = useSelector(state => state.auth.user)
+  console.log(user)
   return (
     <form className='bg-white w-full p-10 overflow-y-auto '>
       <div className="space-y-12">
@@ -93,8 +82,9 @@ const ProfilePage = () => {
                   type="text"
                   name="first-name"
                   id="first-name"
-                  autoComplete="given-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  disabled
+                  value={user.displayName}
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -108,7 +98,8 @@ const ProfilePage = () => {
                   id="email"
                   name="email"
                   type="email"
-                  autoComplete="email"
+                  disabled
+                  value={user.username}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
