@@ -2,9 +2,40 @@ import React from "react";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import { Dialog } from "@headlessui/react";
 
-const CreateChatForm = ({ createChatUsing, setCreateChatUsing, setCreateChatModalStatus, cancelButtonRef }) => {
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
+const CreateChatForm = ({ createChatUsing, setCreateChatUsing, setCreateChatModalStatus, cancelButtonRef }) => {   
+  const user = useSelector(state => state.auth.user)
+
+  const createChat = async(e) => {
+    e.preventDefault()
+
+    const form = new FormData(e.currentTarget)
+    let values = {}
+    for( var pair of form.entries() ) {
+      values[pair[0]] = pair[1]
+    }
+  
+    try{
+      const createChatResponse = await axios.request({
+        method: 'POST',
+        url: 'http://localhost:5000/api/room/create',
+        body: {
+          type: createChatUsing,
+          user_1: user.user_id,
+          user2: values.user2
+        }
+      })
+      toast.success(createChatResponse.data.success ? 'New chat created!!' : 'Failed to create new chat!!')
+      setCreateChatModalStatus(false)
+    } catch(error) {
+      console.log(error)
+    }
+  }
   return (
-    <div>
+    <form onSubmit={createChat}>
       <div className="bg-black px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
         <div className="sm:flex sm:items-start">
           <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
@@ -18,7 +49,7 @@ const CreateChatForm = ({ createChatUsing, setCreateChatUsing, setCreateChatModa
               Create New Chat
             </Dialog.Title>
             <div className="mt-2 flex flex-row justify-between w-full">
-              <form>
+              <div>
                 <div className="w-full h-fit p-2 flex flex-col justify-around items-start gap-3">
                   <div className="flex flex-col gap-y-1">
                     <label
@@ -34,10 +65,11 @@ const CreateChatForm = ({ createChatUsing, setCreateChatUsing, setCreateChatModa
                   </div>
                   <input
                     type={createChatUsing == "uid" ? "text" : "email"}
+                    name={"user2"}
                     className="rounded bg-neutral-800 text-white text-sm tracking-wider font-medium"
                   />
                 </div>
-              </form>
+              </div>
               <div className="flex flex-col justify-around items-center">
                 <div className="w-full">
                   <span className="font-bold tracking-wide text-[12px] text-white">
@@ -75,9 +107,8 @@ const CreateChatForm = ({ createChatUsing, setCreateChatUsing, setCreateChatModa
       </div>
       <div className="bg-black px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
         <button
-          type="button"
+          type="submit"
           className="inline-flex w-full justify-center rounded-md bg-sky-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-600 sm:ml-3 sm:w-auto"
-          onClick={() => setCreateChatModalStatus(false)}
         >
           Create New Chat
         </button>
@@ -90,7 +121,7 @@ const CreateChatForm = ({ createChatUsing, setCreateChatUsing, setCreateChatModa
           Cancel
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 

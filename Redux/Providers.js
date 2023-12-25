@@ -5,6 +5,7 @@ import { persistStore } from 'redux-persist'
 import SocketProvider from '@/context/Socket/SocketContext'
 
 import Store from './Store'
+import { ToastContainer } from 'react-toastify'
 
 const Providers = ({ children }) => {
     const persistor = persistStore(Store);

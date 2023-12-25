@@ -5,6 +5,7 @@ import { persistReducer } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
 import authReducer from "./Reducers/Auth/authReducer";
 import layoutReducer from "./Reducers/LayoutSwitch";
+import chatReducer from "./Reducers/Chat/chatReducer";
 
 const persistConfig = {
     key: 'root',
@@ -14,7 +15,8 @@ const persistConfig = {
 
 const reducer = combineReducers({
     auth: authReducer,
-    layoutSwitch: layoutReducer
+    layoutSwitch: layoutReducer,
+    chat: chatReducer
 })
 
 const persistedReducer = persistReducer(persistConfig,reducer);

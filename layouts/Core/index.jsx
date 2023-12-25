@@ -3,6 +3,7 @@ import Sidebar from '@/components/Sidebar'
 import React, { useState } from 'react'
 import Styles from "@/styles/Scrollbar.module.css"
 import Chat from '@/components/Chat'
+import { ToastContainer } from 'react-toastify'
 
 const CoreLayout = ({ children }) => {
   const [ chatSelected , setChatSelected ] = useState(false)
@@ -21,6 +22,14 @@ const CoreLayout = ({ children }) => {
         />
       </div>
       <div className='w-full h-full flex flex-row backdrop-blur-lg saturate-100 lg:divide-x-[1.5px] divide-gray-600'>
+        <ToastContainer
+          position='top-right'
+          autoClose={3000}
+          hideProgressBar
+          newestOnTop
+          rtl={false}
+
+        />
         <div className='w-full lg:w-[40%] divide-y-[1.5px] divide-gray-600 lg:px-2'>
           <div className="w-full h-20">
             <Header/>

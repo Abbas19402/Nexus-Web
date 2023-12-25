@@ -4,11 +4,14 @@ import { useState } from 'react';
 import ChatHeaderMenu from '@/components/Context/ChatHeaderMenu';
 import Icons from '@/components/Icons';
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Modal from '@/components/Modals';
 
 const ChatHeader = ({ chatSelected , setChatSelected }) => {
   const dispatch = useDispatch();
+  const activeChatUser = useSelector(state => state.chat.activeUser)
+
+  console.log(activeChatUser);
 
   const [ contextStatus , setContextStatus ] = useState(false);
 
@@ -24,7 +27,7 @@ const ChatHeader = ({ chatSelected , setChatSelected }) => {
             imageUrl={`https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`} 
           />
           <div className="mx-2">
-            <span className="text-white tracking-wide font-medium">Name</span>
+            <span className="text-white tracking-wide font-medium">{activeChatUser? activeChatUser.displayName : 'Currently No active chats'}</span>
           </div>
         </div>
         <div className="flex justify-end items-center gap-x-3">

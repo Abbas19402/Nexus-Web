@@ -1,7 +1,6 @@
 import React , { useState } from 'react'
 import ChatHeader from './Header/ChatHeader'
 import MessageBox from './Message Box'
-import { useSelector } from 'react-redux'
 
 const Chat = ({ chatSelected , setChatSelected }) => {
   const [ chats , setChats ] = useState([]);

@@ -1,4 +1,5 @@
 import { LOGOUT } from "@/Redux/Reducers/Auth/authReducer"
+import { SET_CHAT_INACTIVE } from "@/Redux/Reducers/Chat/chatReducer"
 import { useRouter } from "next/router"
 import { useDispatch } from "react-redux"
 
@@ -19,7 +20,10 @@ const CoreContextMenu = () => {
             <div className="w-full h-fit py-0.5 hover:cursor-pointer px-6 my-0.5 hover:bg-neutral-700 rounded-sm transition-all duration-150">
                 <span className="text-sm tracking-tight text-white">More</span>
             </div>
-            <div className="w-full h-fit py-0.5 hover:cursor-pointer px-6 my-0.5 hover:bg-neutral-700 rounded-sm transition-all duration-150" onClick={()=> dispatch(LOGOUT())}>
+            <div className="w-full h-fit py-0.5 hover:cursor-pointer px-6 my-0.5 hover:bg-neutral-700 rounded-sm transition-all duration-150" onClick={()=> {
+                dispatch(LOGOUT())
+                dispatch(SET_CHAT_INACTIVE())
+            }}>
                 <span className="text-sm tracking-tight text-white">Logout</span>
             </div>
         </div>
