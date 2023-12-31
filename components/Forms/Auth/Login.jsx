@@ -42,11 +42,11 @@ const Login = ({ isSignupComplted }) => {
     <form className='py-2 text-white' onSubmit={loginUser}>
       <div className="w-full h-fit py-2 flex flex-col gap-y-2">
           <label htmlFor="email" className='text-gray-500 text-lg  font-medium tracking-wide'>E-mail</label>
-          <input type="email" name="email" id="email" className='bg-transparent border-[2px] border-gray-400 focus:outline-0 rounded-md' />
+          <input type="email" name="email" id="email" className='bg-transparent border-[2px] border-gray-400 focus:outline-0 rounded-md p-1' />
       </div>
       <div className="w-full h-fit py-2 flex flex-col gap-y-2">
           <label className='text-gray-500 text-lg  font-medium tracking-wide'>Password</label>
-          <input type="text" name="password" id="password" className='bg-transparent border-[2px] border-gray-400 focus:outline-0 rounded-md' />
+          <input type="password" name="password" id="password" className='bg-transparent border-[2px] border-gray-400 focus:outline-0 rounded-md p-1 text-md' />
       </div>
       <div className="w-full my-2">
         <span className="text-md tracking-wide text-red-700">{error.message}</span>

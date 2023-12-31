@@ -1,0 +1,13 @@
+::-webkit-scrollbar {
+    /* Customize the scrollbar width */
+    width: 30px;
+}
+
+::-webkit-scrollbar-track {
+    /* Customize the scrollbar track */
+    background-color: red;
+}
+
+::-webkit-scrollbar-thumb {
+    /* Customize the scrollbar thumb */
+}

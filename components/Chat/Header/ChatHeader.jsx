@@ -11,8 +11,6 @@ const ChatHeader = ({ chatSelected , setChatSelected }) => {
   const dispatch = useDispatch();
   const activeChatUser = useSelector(state => state.chat.activeUser)
 
-  console.log(activeChatUser);
-
   const [ contextStatus , setContextStatus ] = useState(false);
 
   return (

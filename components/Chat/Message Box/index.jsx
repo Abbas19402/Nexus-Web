@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 const MessageBox = ({ setChats }) => {
   const socket = useContext(SocketContext);
   const user = useSelector(state => state.auth.user)
+  const active_room = useSelector(state => state.chat.activeRoom)
 
   const Send = (e) => {
     e.preventDefault(); 
@@ -23,10 +24,14 @@ const MessageBox = ({ setChats }) => {
     })
 
     socket.emit('chatMessage', {
-      message: values.message,
-      senderId: user.user_id,
-      senderName: user.displayName,
-    });
+      message: {
+        message: values.message,
+        senderId: user.user_id,
+        senderName: user.displayName
+      },
+      room_id: active_room
+    }
+    );
     e.target.reset();
   }
 

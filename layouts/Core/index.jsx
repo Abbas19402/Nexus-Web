@@ -1,7 +1,7 @@
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 import React, { useState } from 'react'
-import Styles from "@/styles/Scrollbar.module.css"
+// import Styles from "@/styles/Scrollbar.module.css"
 import Chat from '@/components/Chat'
 import { ToastContainer } from 'react-toastify'
 
@@ -34,7 +34,7 @@ const CoreLayout = ({ children }) => {
           <div className="w-full h-20">
             <Header/>
           </div>
-          <div className={`min-h-screen h-full lg:w-full overflow-y-auto ${Styles.customScrollbar}`}>
+          <div className={`min-h-screen h-full lg:w-full overflow-y-auto`}>
             <div className="w-full h-full lg:hidden ">
               {chatSelected ? <Chat
                 setChatSelected={setChatSelected} 

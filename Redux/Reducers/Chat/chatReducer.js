@@ -3,11 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const Chat = createSlice({
     name: "Chat",
     initialState: {
-        activeUser: {}
+        activeUser: {},
+        activeRoom: ''
     },
     reducers: {
         SET_ACTIVE_CHAT_USER: (state, action) => {
-            state.activeUser = action.payload
+            state.activeUser = action.payload.user,
+            state.activeRoom = action.payload.room
         },
         SET_CHAT_INACTIVE: state => {
             state.activeUser = {}

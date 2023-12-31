@@ -1,40 +1,43 @@
-import React, { createContext, useEffect } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
 
 export const SocketContext = createContext();
 
 const SocketProvider = ({ children }) => {
+  const user = useSelector(state => state.auth.user)
   const socket = io('http://localhost:5000', {
     withCredentials: true
   });
 
+  const [ socket_id, setSocket_id ] = useState(null)
+
   useEffect(() => {
     console.log("SocketProvider: useEffect - Component mounted");
 
-    // Listen for the 'connect' event instead of 'connection'
     const handleConnect = () => {
       console.log("SocketProvider: Connected to the socket!!!", socket.id);
+      socket.emit('setUserID' , {user_id: user.user_id})
     };
-
-    // Handle socket errors
     const handleConnectError = (error) => {
       console.error("SocketProvider: Socket connection error:", error.message);
     };
 
-    // Set up event listeners
-    socket.on('connect', handleConnect);
-    socket.on('connect_error', handleConnectError);
+    if(socket_id == null) {
+      socket.on('connect', handleConnect);
+      socket.emit('getSocket',{uid: user.user_id},(sid) => {
+        setSocket_id(sid)
+      })
+      socket.on('userJoined',(data)=> {
+        console.log(`${data.user_id}: joined the room: ${data.roomId}`)
+      })
+      socket.on('connect_error', handleConnectError);
+    }
 
-    // Clean up the socket connection when the component is unmounted
     return () => {
-      console.log("SocketProvider: useEffect - Component will unmount");
       console.log("SocketProvider: Disconnected with socket");
-
-      // Remove event listeners
       socket.off('connect', handleConnect);
       socket.off('connect_error', handleConnectError);
-
-      // Disconnect the socket
       socket.disconnect();
     };
   }, [socket]);
